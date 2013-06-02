@@ -1,0 +1,7 @@
+<div class="avatar" style="float:left; padding-right:16px;"><?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?></div>
+<h3>Salut, <?php echo $this->zfcUserDisplayName() ?>!</h3>
+
+<p><a class="btn btn-success" href="<?php echo $this->url('voyage') ?>"><i class="icon-heart icon-white"></i> Mes Voyages &raquo;</a>
+<a class="btn btn-primary" href="<?php echo $this->url('zfcuser/logout')?>"><i class="icon-off icon-white"></i> Déconnectez vous</a></p>
+
+<div style="clear:both;"></div>

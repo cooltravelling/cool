@@ -1,0 +1,62 @@
+<?php
+
+$title = 'Mes Parcours';
+$this->headTitle($title);
+?>
+
+
+<script>
+  $(function() {
+    $("#accordion").accordion({ collapsible: true, active: false});
+    var icons = {
+      header: "ui-icon-circle-arrow-e",
+      activeHeader: "ui-icon-circle-arrow-s"
+    };
+    $( "#accordion" ).accordion({
+      icons: icons
+    });
+
+    $( "#toggle" ).button().click(function() {
+      if ( $( "#accordion" ).accordion( "option", "icons" ) ) {
+        $( "#accordion" ).accordion( "option", "icons", null );
+      } else {
+        $( "#accordion" ).accordion( "option", "icons", icons );
+      }
+    });
+  });
+  </script>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<a class="btn btn-small btn-primary" href="<?php echo $this->url('parcours',array('action'=>'add', 'id' => $this->idvoyage));?>"><i class="icon-plus icon-white"></i>Ajouter nouveau parcours</a>
+
+<div id="accordion">
+<?php foreach ($this->results as $result): ?>
+
+  <h3><?php echo $result['parcours']->ville_depart ."-". $result['parcours']->ville_arrivee ;?> &raquo;</h3>
+  <div>
+    <strong>Date début du parcours :</strong>
+      <p><?php echo $result['parcours']->date_debut;?></p>
+    <strong>Date début :</strong>
+      <p><?php echo $result['parcours']->date_fin;?></p>
+    <strong>Date Fin :</strong>
+      <p><?php echo $result['parcours']->date_fin;?></p>
+    <strong>Voyage concernée :</strong>
+      <p><?php echo $result['voyages']->nom_voyages;?></p>
+    <a class="btn" href="<?php echo $this->url('parcours',array('action'=>'edit', 'id' => $result['parcours']->id));?>">Modifier</a>
+    <a class="btn" href="<?php echo $this->url('parcours',array('action'=>'delete', 'id' => $result['parcours']->id));?>">Supprimer</a>
+    <div class="btn-group dropup">
+      <button class="btn">Details</button>
+      <button class="btn dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Parcours</a></li>
+          <li><a href="#>">Transports</a></li>
+          <li><a href="#">Activités</a></li>
+          <li><a href="#">Valises</a></li>         
+        </ul>
+    </div>
+  </div>
+<?php endforeach; ?>
+</div>

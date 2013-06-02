@@ -1,0 +1,71 @@
+<?php
+// module/Voyage/view/voyage/voyage/index.phtml:
+
+$title = 'Mes Voyages';
+$this->headTitle($title);
+?>
+
+
+<script>
+  $(function() {
+    $("#accordion").accordion({ collapsible: true, active: false});
+    var icons = {
+      header: "ui-icon-circle-arrow-e",
+      activeHeader: "ui-icon-circle-arrow-s"
+    };
+    $( "#accordion" ).accordion({
+      icons: icons
+    });
+
+    $( "#toggle" ).button().click(function() {
+      if ( $( "#accordion" ).accordion( "option", "icons" ) ) {
+        $( "#accordion" ).accordion( "option", "icons", null );
+      } else {
+        $( "#accordion" ).accordion( "option", "icons", icons );
+      }
+    });
+  });
+  </script>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<p>
+  <a class="btn btn-small btn-primary" href="<?php echo $this->url('voyage', array('action'=>'add'));?>"><i class="icon-plus icon-white"></i>Ajouter nouveau voyage</a>
+</p>
+
+<div id="accordion">
+<?php foreach ($this->results as $result): ?>
+  <h3><?php echo $result['voyages']->nom_voyages;?> &raquo;</h3>
+  <div>
+    <strong>Etat de votre voyage :</strong>
+      <p><?php echo $result['voyages']->etat_voyages;?></p>
+    <strong>Date début :</strong>
+      <p><?php echo $result['voyages']->datedebut;?></p>
+    <strong>Date Fin :</strong>
+      <p><?php echo $result['voyages']->datefin;?></p>
+    <strong>Type Voyage :</strong>
+      <p><?php echo $result['type']->nom_typev;?></p>
+    <a class="btn" href="<?php echo $this->url('voyage',array('action'=>'edit', 'id' => $result['voyages']->id));?>">Modifier</a>
+    <a class="btn" href="<?php echo $this->url('voyage',array('action'=>'delete', 'id' => $result['voyages']->id));?>">Supprimer</a>
+    <div class="btn-group dropup">
+      <button class="btn">Details</button>
+      <button class="btn dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+      </button>
+        <ul class="dropdown-menu">
+          <li><a href="<?php echo $this->url('parcours', array('action'=>'list', 'id' => $result['voyages']->id));?>">Parcours</a></li>
+          <li><a href="#>">Transports</a></li>
+          <li><a href="#">Activités</a></li>
+          <li><a href="<?php/* echo $this->url('valise', array('action'=>'list', 'id' => $result['voyages']->id));*/?>">Valises</a></li>         
+    <!-- dropdown menu links -->
+        </ul>
+    </div>
+  </div>
+<?php endforeach; ?>
+</div>
+
+
+  
+
+
+

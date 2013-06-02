@@ -1,0 +1,51 @@
+.container-navbar {
+ background-color: #222222;
+}
+
+.left {
+ float: left;
+}
+
+.right {
+  float: right;
+}
+
+.image {
+  float: right;
+}
+
+.social {
+  float: right;
+  padding-right: 20px;
+}
+
+dt.rem {
+    display: block;
+    padding-left: 15px;
+    text-indent: 20px;
+}
+
+dd.remem input {
+  width: 15px;
+  height: 40px;
+  padding: 0;
+  margin:0;
+  vertical-align: bottom;
+  position: relative;
+  top: -37px;
+  *overflow: hidden;
+}
+
+div.avatar img {
+  height: 100px;
+  width: 100px;
+}
+
+body {
+  background: url('/img/bg2.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment:fixed;
+}

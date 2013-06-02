@@ -1,0 +1,47 @@
+<?php
+	$title = 'Ajouter nouveau parcours';
+	$this->headTitle($title);
+?>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/overcast/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	
+	<script>
+		$(function() {
+			$('dl.zend-form dd, input.datepick').each(function(){
+				var date = $(this).datepicker({ dateFormat: 'yy-mm-dd' }).val();
+			});
+		});
+  	</script>
+  	<script type="text/javascript">
+			$(function() {		
+    			var id_v = <?php echo $this->id;?>;
+				$('input#voyage_id').val(id_v);
+		});
+	</script>
+
+	<h1><?php echo $this->escapeHtml($title); ?></h1>
+		<?php
+		$form = $this->form;
+		$form->prepare();
+		$form->setAttribute('action', $this->url('parcours', array('action' => 'add', 'id' => $this->id)));
+		$form->setAttribute('method', 'post');
+		echo $this->form()->openTag($form);?>
+		<dl class='zend_form'/>
+			<?php echo $this->formElementErrors($form->get('id')); 
+			echo $this->formHidden($form->get('id'));
+			echo $this->formHidden($form->get('voyage_id'));?>
+
+        	<dt><?php echo $this->formLabel($form->get('ville_depart')) ?></dt>
+        	<dd><?php echo $this->formInput($form->get('ville_depart')) ?></dd>
+			<dt><?php echo $this->formLabel($form->get('ville_arrivee')) ?></dt>
+        	<dd><?php echo $this->formInput($form->get('ville_arrivee')) ?></dt>
+			<dt><?php echo $this->formLabel($form->get('date_debut')) ?></dt>
+        	<dd><?php echo $this->formInput($form->get('date_debut')) ?></dd>
+        	<dt><?php echo $this->formLabel($form->get('date_fin')) ?></dt>
+        	<dd><?php echo $this->formInput($form->get('date_fin')) ?></dd>
+			
+			<dd><?php echo $this->formSubmit($form->get('submit')) ?></dd>
+		</dl>			
+	<?php echo $this->form()->closeTag(); ?>
+
