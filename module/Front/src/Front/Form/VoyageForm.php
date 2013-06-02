@@ -36,9 +36,9 @@ class VoyageForm extends Form
                 'label' => 'Etat de votre voyage',
                 'empty_option' => 'Choisir..',
                 'value_options' => array(
-                            'En cours' => 'En cours',
-                            'Terminé' => 'Terminé',
-                            'Souhait' => 'Souhait',
+                    'En cours' => 'En cours',
+                    'Terminé' => 'Terminé',
+                    'Souhait' => 'Souhait',
                 ),
             ),
         ));
@@ -85,7 +85,7 @@ class VoyageForm extends Form
         $this->add(array(
             'name' => 'user_id',
             'type' => 'Hidden',
-             'attributes' => array(
+            'attributes' => array(
                 'id' => 'user_id',
             ),   
         ));

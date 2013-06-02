@@ -1,0 +1,50 @@
+<?php
+// module/Valise/view/valise/valise/index.phtml:
+
+$title = 'Mes Valises';
+$this->headTitle($title);
+?>
+
+<script>
+  $(function() {
+    $("#accordion").accordion({ collapsible: true, active: false});
+    var icons = {
+      header: "ui-icon-circle-arrow-e",
+      activeHeader: "ui-icon-circle-arrow-s"
+    };
+    $( "#accordion" ).accordion({
+      icons: icons
+    });
+
+    $( "#toggle" ).button().click(function() {
+      if ( $( "#accordion" ).accordion( "option", "icons" ) ) {
+        $( "#accordion" ).accordion( "option", "icons", null );
+      } else {
+        $( "#accordion" ).accordion( "option", "icons", icons );
+      }
+    });
+  });
+  </script>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<p>
+  <a class="btn btn-small btn-primary" href="<?php echo $this->url('valise', array('action'=>'add', 'id' => $this->id));?>"><i class="icon-plus icon-white"></i>Ajouter une nouvelle valise</a>
+</p>
+
+<div id="accordion">
+<?php foreach ($this->results as $result): ?>
+  <h3><?php echo $result['valise']->nom_proprietaire;?> &raquo;</h3>
+  <div>
+    <a class="btn" href="<?php/* echo $this->url('valise',array('action'=>'delete', 'id' => $result['voyages']->id));*/?>">Ajouter des Articles</a>
+    <a class="btn" href="<?php echo $this->url('valise',array('action'=>'edit', 'id' => $result['voyages']->id));?>">Modifier</a>
+    <a class="btn" href="<?php echo $this->url('valise',array('action'=>'delete', 'id' => $result['voyages']->id));?>">Supprimer</a>
+  </div>
+<?php endforeach; ?>
+</div>
+
+
+  
+
+
+

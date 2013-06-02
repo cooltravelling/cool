@@ -1,0 +1,54 @@
+<?php
+$title = 'Modifier un voyage';
+$this->headTitle($title);
+?>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/overcast/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+	
+	<script>
+		$(function() {
+			$('dl.zend-form dd, input.datepick').each(function(){
+				var date = $(this).datepicker({ dateFormat: 'yy-mm-dd' }).val();
+			});
+		});
+  	</script>
+  	<script type="text/javascript">
+			$(function() {		
+    			var id_u = <?php echo $this->zfcUserIdentity()->getId();?>;
+				console.log("the value you selected: " + id_u);
+				$('input#user_id').val(id_u);
+		});
+	</script>
+
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+		$form = $this->form;
+		$form->prepare();
+		$form->setAttribute('action', $this->url('voyage', array('action' => 'edit')));
+		$form->setAttribute('method', 'post');
+		echo $this->form()->openTag($form);?>
+
+<dl class='zend_form'/>
+	<?php echo $this->formElementErrors($form->get('id')); 
+	echo $this->formHidden($form->get('id'));
+	echo $this->formHidden($form->get('type_id'));
+	echo $this->formHidden($form->get('user_id'));?>
+
+	<dt><?php echo $this->formLabel($form->get('nom_voyages')) ?></dt>
+    <dd><?php echo $this->formInput($form->get('nom_voyages')) ?></dd>
+	<dt><?php echo $this->formLabel($form->get('etat_voyages')) ?></dt>
+    <dd><?php echo $this->formSelect($form->get('etat_voyages')) ?></dt>
+    <dt><?php echo $this->formLabel($form->get('type_id')) ?></dt>
+    <dd><?php echo $this->formSelect($form->get('type_id')) ?></dt>
+	<dt><?php echo $this->formLabel($form->get('datedebut')) ?></dt>
+    <dd><?php echo $this->formInput($form->get('datedebut')) ?></dd>
+    <dt><?php echo $this->formLabel($form->get('datefin')) ?></dt>
+    <dd><?php echo $this->formInput($form->get('datefin')) ?></dd>
+			
+	<dd><?php echo $this->formSubmit($form->get('submit')) ?></dd>
+</dl>			
+<?php echo $this->form()->closeTag(); ?>

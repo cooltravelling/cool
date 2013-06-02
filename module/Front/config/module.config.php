@@ -41,6 +41,20 @@ return array(
                     ),
                 ),
             ),
+            'valise' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/valise[/][:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Front\Controller\Valise',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(
@@ -58,12 +72,6 @@ return array(
             ),
         ),
     ),
-    /*'controllers' => array(
-        'invokables' => array(
-            'Front\Controller\Index' => 'Front\Controller\IndexController',
-            //'Front\Controller\Voyage' => 'Front\Controller\VoyageController',
-        ),
-    ),*/
     'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,

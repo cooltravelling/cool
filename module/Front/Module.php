@@ -6,10 +6,14 @@ use Zend\Mvc\MvcEvent;
 
 use Front\Controller\IndexController;
 use Front\Controller\VoyageController;
+use Front\Controller\ValiseController;
 use Front\Controller\ParcoursController;
 
 use Front\Model\VoyageTable;
+use Front\Model\ValiseTable;
 use Front\Model\Voyage;
+use Front\Model\Valise; 
+use Front\Model\Articles; 
 use Front\Model\TypeVoyage;
 use Front\Model\TypeVoyageTable;
 use Front\Model\Parcours;
@@ -66,6 +70,11 @@ class Module
                     $table = new ParcoursTable($dbAdapter);
                     return $table;
                 },
+                'Front\Model\ValiseTable' =>  function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new ValiseTable($dbAdapter);
+                    return $table;
+                },
             ),
         );
     }
@@ -85,6 +94,13 @@ class Module
                     $parcours = $sm->get('Front\Model\ParcoursTable');
                     $voyage = $sm->get('Front\Model\VoyageTable');
                     $controller = new ParcoursController($parcours,$voyage);
+                    return $controller;
+                },
+                'Front\Controller\Valise' => function(ControllerManager $cm) {
+                    $sm = $cm->getServiceLocator();
+                    $valise = $sm->get('Front\Model\ValiseTable');
+                    $voyage = $sm->get('Front\Model\VoyageTable');
+                    $controller = new ValiseController($valise,$voyage);
                     return $controller;
                 },
                 'Front\Controller\Index' => function(ControllerManager $cm) {
