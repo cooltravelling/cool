@@ -55,6 +55,20 @@ return array(
                     ),
                 ),
             ),
+            'activites' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/activites[/][:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Front\Controller\Activites',
+                        'action'     => 'list',
+                    ),
+                ),
+            ),
         ),
     ),
     'service_manager' => array(

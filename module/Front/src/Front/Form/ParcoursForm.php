@@ -80,11 +80,13 @@ class ParcoursForm extends Form
                 'class' => 'btn btn-primary'
             ),
         ));
+
+
     }
 
     protected function getVoyageOptions()
     {
-        $data  = $this->voyageTable->toArray();
+        $data = $this->voyageTable->toArray();
         $selectData = array();
             
         foreach ($data as $key => $selectOption) {

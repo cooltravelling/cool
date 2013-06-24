@@ -19,4 +19,10 @@ class ValiseHasArticles
         $this->typevoyages_id = (isset($data['typevoyages_id'])) ? $data['typevoyages_id'] : null;
         $this->article_id = (isset($data['article_id'])) ? $data['article_id'] : null;       
     }
+
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
+
 }

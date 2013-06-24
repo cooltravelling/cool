@@ -1,21 +1,20 @@
 <?php
 namespace Front\Model;
 
-use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class TypeArticle
+class MoyenDeTransportHasVoyages
 {
-    public $id;
-    public $nom_type;
+    public $moyendetransport_id;
+    public $voyages_id;
     protected $inputFilter; 
-    
+
     public function exchangeArray($data)
     {
-        $this->id = (isset($data['id'])) ? $data['id'] : null;
-		$this->nom_type = (isset($data['nom_type'])) ? $data['nom_type'] : null;             
+        $this->moyendetransport_id = (isset($data['moyendetransport_id'])) ? $data['moyendetransport_id'] : null;
+		$this->voyages_id = (isset($data['voyages_id'])) ? $data['voyages_id'] : null;   
     }
 
     public function getArrayCopy()

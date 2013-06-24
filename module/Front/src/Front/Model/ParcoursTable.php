@@ -39,7 +39,49 @@ class ParcoursTable extends AbstractTableGateway
         return $aData;
     }
 
-    /*
+    
+
+    public function getParcours($id)
+    {
+        $id  = (int)$id;
+        $rowset = $this->select(array('id' => $id));
+        $row = $rowset->current();
+
+        if (!$row) {
+            throw new \Exception("Could not find row $id");
+        }
+        return $row;
+    }
+
+    public function saveParcours(Parcours $parcours)
+    {
+        $data = array(
+            'ville_depart' => $parcours->ville_depart,
+            'ville_arrivee' => $parcours->ville_arrivee,
+            'date_debut' => $parcours->date_debut,
+            'date_fin' => $parcours->date_fin,
+            'voyage_id' => $parcours->voyage_id,
+        );
+
+        $id = (int)$parcours->id;
+        if ($id == 0) {
+            $this->insert($data);
+        } else {
+            if ($parcours->id) {
+                $this->update($data, array('id' => $parcours->id));
+            } else {
+                throw new \Exception('Form id does not exist');
+            }
+        }
+    }
+    
+    public function deleteParcours($id)
+    {
+        $this->delete(array('id' => $id));
+    }
+}
+
+/*
     public function fetchById($idt)
     {
         $id  = (int)$idt;
@@ -85,43 +127,3 @@ class ParcoursTable extends AbstractTableGateway
 
         return $result;
     }*/
-
-    public function getParcours($id)
-    {
-        $id  = (int)$id;
-        $rowset = $this->select(array('id' => $id));
-        $row = $rowset->current();
-
-        if (!$row) {
-            throw new \Exception("Could not find row $id");
-        }
-        return $row;
-    }
-
-    public function saveParcours(Parcours $parcours)
-    {
-         $data = array(
-            'ville_depart' => $parcours->ville_depart,
-            'ville_arrivee' => $parcours->ville_arrivee,
-            'date_debut' => $parcours->date_debut,
-            'date_fin' => $parcours->date_fin,
-            'voyage_id' => $parcours->voyage_id,
-        );
-
-        $id = (int)$parcours->id;
-        if ($id == 0) {
-            $this->insert($data);
-        } else {
-            if ($parcours->id) {
-                $this->update($data, array('id' => $parcours->id));
-            } else {
-                throw new \Exception('Form id does not exist');
-            }
-        }
-    }
-    
-    public function deleteParcours($id)
-    {
-        $this->delete(array('id' => $id));
-    }
-}

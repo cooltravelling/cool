@@ -9,6 +9,7 @@ return array(
         'GoalioRememberMe',
         //'BjyAuthorize',
         'BjyProfiler',
+        'AtWeather',
         'Front',
         
     ),

@@ -34,28 +34,31 @@ $this->headTitle($title);
 
   <h3><?php echo $result['parcours']->ville_depart ."-". $result['parcours']->ville_arrivee ;?> &raquo;</h3>
   <div>
-    <strong>Date début du parcours :</strong>
+    <strong>Date Début du parcours :</strong>
       <p><?php echo $result['parcours']->date_debut;?></p>
-    <strong>Date début :</strong>
-      <p><?php echo $result['parcours']->date_fin;?></p>
-    <strong>Date Fin :</strong>
+    <strong>Date Fin du parcours :</strong>
       <p><?php echo $result['parcours']->date_fin;?></p>
     <strong>Voyage concernée :</strong>
       <p><?php echo $result['voyages']->nom_voyages;?></p>
+   <!-- Button to trigger modal -->
+    <a href="#myModal" role="button" class="btn" data-toggle="modal">Météo</a>
+     
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Météo</h3>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Fermer</button>
+      </div>
+    </div>
+
     <a class="btn" href="<?php echo $this->url('parcours',array('action'=>'edit', 'id' => $result['parcours']->id));?>">Modifier</a>
     <a class="btn" href="<?php echo $this->url('parcours',array('action'=>'delete', 'id' => $result['parcours']->id));?>">Supprimer</a>
-    <div class="btn-group dropup">
-      <button class="btn">Details</button>
-      <button class="btn dropdown-toggle" data-toggle="dropdown">
-        <span class="caret"></span>
-      </button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Parcours</a></li>
-          <li><a href="#>">Transports</a></li>
-          <li><a href="#">Activités</a></li>
-          <li><a href="#">Valises</a></li>         
-        </ul>
-    </div>
+    
   </div>
 <?php endforeach; ?>
 </div>

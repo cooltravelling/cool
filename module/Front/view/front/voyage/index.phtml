@@ -55,7 +55,7 @@ $this->headTitle($title);
         <ul class="dropdown-menu">
           <li><a href="<?php echo $this->url('parcours', array('action'=>'list', 'id' => $result['voyages']->id));?>">Parcours</a></li>
           <li><a href="#>">Transports</a></li>
-          <li><a href="#">Activités</a></li>
+          <li><a href="<?php echo $this->url('activites', array('action'=>'list', 'id' => $result['voyages']->id));?>">Activités</a></li>
           <li><a href="<?php echo $this->url('valise', array('action'=>'list', 'id' => $result['voyages']->id));?>">Valises</a></li>         
     <!-- dropdown menu links -->
         </ul>

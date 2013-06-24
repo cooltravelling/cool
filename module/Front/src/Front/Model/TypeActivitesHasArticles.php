@@ -6,16 +6,17 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class TypeArticle
+class TypeVoyageHasArticles
 {
-    public $id;
-    public $nom_type;
+    public $activites_id;
+    public $articles_id;
     protected $inputFilter; 
-    
+
     public function exchangeArray($data)
     {
-        $this->id = (isset($data['id'])) ? $data['id'] : null;
-		$this->nom_type = (isset($data['nom_type'])) ? $data['nom_type'] : null;             
+        $this->activites_id = (isset($data['activites_id'])) ? $data['activites_id'] : null;
+		$this->articles_id = (isset($data['articles_id'])) ? $data['articles_id'] : null;
+		$this->nbre_article = (isset($data['nbre_article'])) ? $data['nbre_article'] : null;           
     }
 
     public function getArrayCopy()

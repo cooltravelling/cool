@@ -63,8 +63,7 @@ class ValiseController extends AbstractActionController
             $voyages = $this->getVoyageTable()->getVoyage($valise->voyages_id);
             $results[] = array('voyages' => $voyages, 'valise' => $valise);
         }
-    
-    
+
         return new ViewModel(
             array(
                 'results' => $results,
@@ -73,10 +72,10 @@ class ValiseController extends AbstractActionController
         );
         return new ViewModel();
     }
-	
-	public function addAction()
-	{
-	$form = new ValiseForm();
+
+    public function addAction()
+    {
+    $form = new ValiseForm();
         $form->get('submit')->setValue('Ajouter');
         $idvoy = (int) $this->params()->fromRoute('id', 0);
         $request = $this->getRequest();
@@ -95,7 +94,8 @@ class ValiseController extends AbstractActionController
         }
         return array('form' => $form,
             'id'=>$idvoy);
-	}
+    }
+	
 
 	public function editAction()
 	{

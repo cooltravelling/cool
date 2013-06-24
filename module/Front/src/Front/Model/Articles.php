@@ -18,7 +18,12 @@ class Articles
     {
         $this->id = (isset($data['id'])) ? $data['id'] : null;
 		$this->nom_article = (isset($data['nom_article'])) ? $data['nom_article'] : null;
-        $this->type_id = (isset($data['type_id'])) ? $data['type_id'] : null;
-             
+        $this->type_id = (isset($data['type_id'])) ? $data['type_id'] : null;         
     }
+
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
+
 }

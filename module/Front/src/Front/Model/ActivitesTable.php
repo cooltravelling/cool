@@ -4,17 +4,18 @@ namespace Front\Model;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Db\TableGateway\AbstractTableGateway;
+use Front\Model\Activites;
 
-class TypeVoyageHasArticlesTable extends AbstractTableGateway
+class ActivitesTable extends AbstractTableGateway
 {
     // Table name in database
-    protected $table ='typevoyage_has_articles';
+    protected $table ='activites';
 
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;
         $this->resultSetPrototype = new HydratingResultSet();
-        $this->resultSetPrototype->setObjectPrototype(new TypeVoyageHasArticles());
+        $this->resultSetPrototype->setObjectPrototype(new Activites());
         $this->initialize();
     }
 
@@ -24,7 +25,7 @@ class TypeVoyageHasArticlesTable extends AbstractTableGateway
         return $resultSet;
     }
 
-    public function getTypeVoyageHasArticles($id)
+    public function getActivites($id)
     {
         $id  = (int)$id;
         $rowset = $this->select(array('id' => $id));
@@ -37,20 +38,18 @@ class TypeVoyageHasArticlesTable extends AbstractTableGateway
         return $row;
     }
 
-    public function saveTypeVoyageHasArticles(TypeVoyageHasArticles $typevoyagehasarticles)
+    public function saveActivites(Activites $activites)
     {
         $data = array(
-            'typevoyage_id' => $typevoyagehasarticles->id,
-            'articles_id'  => $typevoyagehasarticles->nom_type,
-			'nbre_article' => $typevoyagehasarticles->nbre_article,			
-			
+            'nom_activite'  => $activites->nom_activite, 
+			'typeactivite_id'  => $activites->typeactivite_id
         );
 
-        $id = (int)$typevoyagehasarticles->id;
+        $id = (int)$activites->id;
 
         if ($id == 0) {
             $this->insert($data);
-        } elseif ($this->getTypeVoyageHasArticles($id)) {
+        } elseif ($this->getActivites($id)) {
             $this->update(
                 $data,
                 array(
@@ -62,7 +61,7 @@ class TypeVoyageHasArticlesTable extends AbstractTableGateway
         }
     }
 
-    public function deleteTypeVoyageHasArticles($id)
+    public function deleteActivites($id)
     {
         $this->delete(array('id' => $id));
     }

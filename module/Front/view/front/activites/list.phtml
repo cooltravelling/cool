@@ -1,0 +1,46 @@
+<?php
+
+$title = 'Mes Activités';
+$this->headTitle($title);
+?>
+
+<script>
+  $(function() {
+    $("#accordion").accordion({ collapsible: true, active: false});
+    var icons = {
+      header: "ui-icon-circle-arrow-e",
+      activeHeader: "ui-icon-circle-arrow-s"
+    };
+    $( "#accordion" ).accordion({
+      icons: icons
+    });
+
+    $( "#toggle" ).button().click(function() {
+      if ( $( "#accordion" ).accordion( "option", "icons" ) ) {
+        $( "#accordion" ).accordion( "option", "icons", null );
+      } else {
+        $( "#accordion" ).accordion( "option", "icons", icons );
+      }
+    });
+  });
+  </script>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<a class="btn btn-small btn-primary" href="<?php echo $this->url('activites',array('action'=>'add', 'id' => $this->idvoyage));?>"><i class="icon-plus icon-white"></i>Ajouter nouveau type d'activité</a>
+
+<div id="accordion">
+<?php foreach ($this->results as $result): ?>
+
+  <h3><?php echo $result['typeactivites']->nom_typeactivite?> &raquo;</h3>
+  <div>
+    <strong>Liste des mes activités</strong>
+      <p><?php //echo $result['activites']->nom_activite;?></p>
+
+    <a class="btn" href="<?php //echo $this->url('activites',array('action'=>'addActiviteAction', 'id' => $result['parcours']->id));?>">Ajouter une activité</a>
+    <a class="btn" href="<?php //echo $this->url('parcours',array('action'=>'edit', 'id' => $result['parcours']->id));?>">Modifier</a>
+    <a class="btn" href="<?php //echo $this->url('parcours',array('action'=>'delete', 'id' => $result['parcours']->id));?>">Supprimer</a>
+    
+  </div>
+<?php endforeach; ?>
+</div>

@@ -1,1 +1,24 @@
-delete
+<?php
+// module/Album/view/album/album/delete.phtml:
+
+$title = 'Supprimer un parcours';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<p>Are you sure that you want to delete
+    <strong>'<?php echo $this->escapeHtml($parcours->ville_depart . " - " .$parcours->ville_arrivee ); ?>'</strong> ?
+</p>
+<?php
+$url = $this->url('parcours', array(
+    'action' => 'delete',
+    'id'     => $parcours->id,
+));
+?>
+<form action="<?php echo $url; ?>" method="post">
+<div>
+    <input type="hidden" name="id" value="<?php echo (int) $parcours->id; ?>" />
+    <input class="btn btn-success" type="submit" name="del" value="Oui" />
+    <input class="btn btn-primary" type="submit" name="del" value="Non" />
+</div>
+</form>

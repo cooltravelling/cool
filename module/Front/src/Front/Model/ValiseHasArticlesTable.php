@@ -2,7 +2,7 @@
 namespace Front\Model;
 
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Db\TableGateway\AbstractTableGateway;
 
 class ValiseHasArticlesTable extends AbstractTableGateway
@@ -13,8 +13,8 @@ class ValiseHasArticlesTable extends AbstractTableGateway
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;
-        $this->resultSetPrototype = new ResultSet();
-        $this->resultSetPrototype->setArrayObjectPrototype(new ValiseHasArticles());
+        $this->resultSetPrototype = new HydratingResultSet();
+        $this->resultSetPrototype->setObjectPrototype(new ValiseHasArticles());
         $this->initialize();
     }
 
@@ -24,10 +24,13 @@ class ValiseHasArticlesTable extends AbstractTableGateway
         return $resultSet;
     }
 
-    public function getValiseHasArticles($id)
+    public function getValiseHasArticles($id,$valise_id)
     {
         $id  = (int)$id;
-        $rowset = $this->select(array('id' => $id));
+        $rowset = $this->select(array(
+                                        'valise_id' => $valise_id,
+                                        'articles_id' => $id
+                                    ));
         $row = $rowset->current();
 
         if (!$row) {
@@ -43,15 +46,17 @@ class ValiseHasArticlesTable extends AbstractTableGateway
             'articles_id'  => $valisearticles->articles_id, 
         );
 
-        $articles_id = (int)$articles->articles_id;
+        $articles_id = (int)$valisearticles->articles_id;
+        $valise_id_id = (int)$valisearticles->valise_id;
 
         if ($articles_id == 0) {
             $this->insert($data);
-        } elseif ($this->getArticles($articles_id)) {
+        } elseif ($this->getValiseHasArticles($valise_id,$articles_id)) {
             $this->update(
                 $data,
                 array(
-                    'articles_id' => $articles_id,
+                    'valise_id' => $valise_id,
+                    'articles_id' => $articles_id, 
                 )
             );
         } else {
@@ -59,8 +64,11 @@ class ValiseHasArticlesTable extends AbstractTableGateway
         }
     }
 
-    public function deleteValiseHasArticles($id)
+    public function deleteValiseHasArticles($id,$article_id)
     {
-        $this->delete(array('id' => $id));
+        $this->delete(array((
+                                'valise_id' => $id,
+                                'articles_id' => $article_id,
+                            ));
     }
 }

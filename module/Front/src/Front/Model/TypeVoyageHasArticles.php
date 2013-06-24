@@ -8,10 +8,9 @@ use Zend\InputFilter\InputFilterInterface;
 
 class TypeVoyageHasArticles
 {
-    public $voyages_id;
+    public $typevoyage_id;
     public $article_id;
     protected $inputFilter; 
-    
 
     public function exchangeArray($data)
     {
@@ -21,5 +20,9 @@ class TypeVoyageHasArticles
                 
     }
 
-   
+    public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
+
 }

@@ -29,7 +29,6 @@ $this->headTitle($title);
 	$form = $this->form;
 	$form->prepare();
 	$form->setAttribute('action', $this->url('voyage', array('action'=>'edit', 'id' => $this->id)));
-	echo $this->$id; 
 	$form->setAttribute('method', 'post');
 	echo $this->form()->openTag($form);?>
 

@@ -2,7 +2,7 @@
 namespace Front\Model;
 
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Db\TableGateway\AbstractTableGateway;
 
 class TypeArticleTable extends AbstractTableGateway
@@ -13,8 +13,8 @@ class TypeArticleTable extends AbstractTableGateway
     public function __construct(Adapter $adapter)
     {
         $this->adapter = $adapter;
-        $this->resultSetPrototype = new ResultSet();
-        $this->resultSetPrototype->setArrayObjectPrototype(new TypeArticle());
+        $this->resultSetPrototype = new HydratingResultSet();
+        $this->resultSetPrototype->setObjectPrototype(new TypeArticle());
         $this->initialize();
     }
 
@@ -37,7 +37,7 @@ class TypeArticleTable extends AbstractTableGateway
         return $row;
     }
 
-    public function saveTypeArticle(TypeArticle $articles)
+    public function saveTypeArticle(TypeArticle $typearticles)
     {
         $data = array(
             'id' => $typearticles->id,
@@ -45,7 +45,7 @@ class TypeArticleTable extends AbstractTableGateway
 			
         );
 
-        $id = (int)$typearticle->id;
+        $id = (int)$typearticles->id;
 
         if ($id == 0) {
             $this->insert($data);

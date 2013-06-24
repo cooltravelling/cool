@@ -6,16 +6,18 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class TypeArticle
+class Activites
 {
     public $id;
-    public $nom_type;
+    public $nom_activite;
+    public $typeactivite_id;
     protected $inputFilter; 
-    
+
     public function exchangeArray($data)
     {
         $this->id = (isset($data['id'])) ? $data['id'] : null;
-		$this->nom_type = (isset($data['nom_type'])) ? $data['nom_type'] : null;             
+		$this->nom_activite = (isset($data['nom_activite'])) ? $data['nom_activite'] : null;
+        $this->typeactivite_id = (isset($data['typeactivite_id'])) ? $data['typeactivite_id'] : null;  
     }
 
     public function getArrayCopy()

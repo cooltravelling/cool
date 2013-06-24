@@ -8,7 +8,9 @@ use Front\Controller\IndexController;
 use Front\Controller\VoyageController;
 use Front\Controller\ValiseController;
 use Front\Controller\ParcoursController;
+use Front\Controller\ActivitesController;
 
+use Front\Model\VoyagesHasActivitesTable;
 use Front\Model\VoyageTable;
 use Front\Model\ValiseTable;
 use Front\Model\Voyage;
@@ -18,6 +20,9 @@ use Front\Model\TypeVoyage;
 use Front\Model\TypeVoyageTable;
 use Front\Model\Parcours;
 use Front\Model\ParcoursTable;
+use Front\Model\VoyagesHasTypeActivitesTable;
+use Front\Model\ActivitesTable;
+use Front\Model\TypeActivitesTable;
 use Zend\ModuleManager\ModuleManager;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\Controller\ControllerManager;
@@ -75,6 +80,26 @@ class Module
                     $table = new ValiseTable($dbAdapter);
                     return $table;
                 },
+                'Front\Model\TypeActivitesTable' =>  function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new TypeActivitesTable($dbAdapter);
+                    return $table;
+                },
+                'Front\Model\ActivitesTable' =>  function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new ActivitesTable($dbAdapter);
+                    return $table;
+                },
+                'Front\Model\VoyagesHasTypeActivitesTable' =>  function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new VoyagesHasTypeActivitesTable($dbAdapter);
+                    return $table;
+                },
+                'Front\Model\VoyagesHasActivitesTable' =>  function($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $table = new VoyagesHasActivitesTable($dbAdapter);
+                    return $table;
+                },
             ),
         );
     }
@@ -101,6 +126,15 @@ class Module
                     $valise = $sm->get('Front\Model\ValiseTable');
                     $voyage = $sm->get('Front\Model\VoyageTable');
                     $controller = new ValiseController($valise,$voyage);
+                    return $controller;
+                },
+                'Front\Controller\Activites' => function(ControllerManager $cm) {
+                    $sm = $cm->getServiceLocator();
+                    $activites = $sm->get('Front\Model\ActivitesTable');
+                    $typeactivites = $sm->get('Front\Model\TypeActivitesTable');
+                    $voyagehastypeactivites = $sm->get('Front\Model\VoyagesHasTypeActivitesTable');
+                    $voyagehasactivites = $sm->get('Front\Model\VoyagesHasActivitesTable');
+                    $controller = new ActivitesController($activites,$voyagehastypeactivites,$typeactivites,$voyagehasactivites);
                     return $controller;
                 },
                 'Front\Controller\Index' => function(ControllerManager $cm) {
